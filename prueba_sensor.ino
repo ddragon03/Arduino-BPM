@@ -2,7 +2,7 @@
 #include <Adafruit_ST7735.h>
 #include <Adafruit_ILI9341.h>
 #include <SPI.h>
-
+1
 #define CS 53           // El pin donde se conecta la CS del display
 #define CD 9             // El pin donde se conecta la CD del display
 #define SDA 51           // El pin donde se conecta la SDA del display
