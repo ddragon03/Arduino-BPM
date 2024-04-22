@@ -3,7 +3,7 @@
 #include <Adafruit_ILI9341.h>
 #include <SPI.h>
 
-#define CS 53            // El pin donde se conecta la CS del display
+#define CS 53 e           // El pin donde se conecta la CS del display
 #define CD 9             // El pin donde se conecta la CD del display
 #define SDA 51           // El pin donde se conecta la SDA del display
 #define MOSI SDA         // El pin donde se conecta la MOSI SDA del display
