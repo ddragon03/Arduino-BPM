@@ -16,7 +16,7 @@ public class AnalizadorBPM {
 		} else if (valor < 55) {
 			System.out.println("El valor es muy bajo, hay riesgo de una bradicardia.");
 			//Poner un código que contacte con urgencias.
-		} else {
+		} else if (valor>56 && valor<104) {
 			System.out.println("El valor está en su rango regular");
 		}
 	}
