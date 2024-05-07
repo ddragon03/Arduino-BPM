@@ -14,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ExcelRead {
+public class ExcelRead2 {
 
 	public static void main(String[] args) {
 
@@ -31,28 +31,37 @@ public class ExcelRead {
 			Iterator<Cell> columnas = null;
 			Row filaNOW = null;
 			Cell columnaNOW = null;
-
-		while(filas.hasNext()) {
+			String valorStr = " ";
+			double valorDouble = 0;
+			
+			while(filas.hasNext()) {
 				filaNOW=filas.next();
 				columnas=filaNOW.cellIterator();
 				while(columnas.hasNext()){
-					columnaNOW=columnas.next();
-					if(columnaNOW.getCellType()== CellType.NUMERIC) {
-						valor = columnaNOW.getNumericCellValue();
-						System.out.println(valor);
-						double valorLeido = valor; // Ejemplo de valor leído del archivo Excel
-						AnalizadorBPM procesador = new AnalizadorBPM(valorLeido);
-						procesador.procesarValor();
-					}
-					if(columnaNOW.getCellType()== CellType.NUMERIC && DateUtil.isCellDateFormatted(columnaNOW)) {
+					columnaNOW=columnas.next(); 
+					if (columnaNOW.getCellType() == CellType.STRING) {
+						valorStr = columnaNOW.getStringCellValue();
+						try {
+							// Intentar convertir el valor de String a double
+							valorDouble = Double.parseDouble(valorStr);
+							System.out.println("Valor como double: " + valorDouble);
+							// Aquí puedes pasar el valor a la clase ProcesadorValor si necesitas hacer algo con él
+							AnalizadorBPM procesador = new AnalizadorBPM(valorDouble);
+							procesador.procesarValor();
+						} catch (NumberFormatException e) {
+							// Si no se puede convertir a double, imprimir un mensaje de error
+							System.out.println("Error: No se puede convertir el valor a double.");
+						}
+					} else if (columnaNOW.getCellType() == CellType.NUMERIC && DateUtil.isCellDateFormatted(columnaNOW)) {
 						Date fecha = columnaNOW.getDateCellValue();
-						System.out.println(fecha );
+						System.out.println("Fecha: " + fecha);
 					}
 				}
-				input.close();
-				libro.close();
 			}
-		
+
+			input.close();
+			libro.close();
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -62,3 +71,4 @@ public class ExcelRead {
 	}
 
 }
+
